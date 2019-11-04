@@ -4,36 +4,30 @@ import {
     Switch,
     Route
 } from "react-router-dom";
-import { createGlobalStyle } from "styled-components";
 import {connect} from 'react-redux';
 import {IntlProvider} from "react-intl";
 
-import NavBar from "./components/layout/NavBar";
-import ShopPage from "./components/pages/ShopPage";
-import BasketPage from "./components/pages/BasketPage";
-import OrderPage from "./components/pages/OrderPage";
-import FinishPage from "./components/pages/FinishPage";
-import PageNotFound from "./components/pages/PageNotFound";
-import {getLang} from "./selectors/langSelectors";
-import messages from "./localization";
+import NavBar from "../navbar/NavBar";
+import ShopPage from "../catalog/ShopPage";
+import BasketPage from "../basket/BasketPage";
+import OrderPage from "../order/OrderPage";
+import FinishPage from "../finish/FinishPage";
+import PageNotFound from "../404/PageNotFound";
+import {getLang} from "../../selectors/langSelectors";
+import messages from "../../localization";
+import {GlobalStyle} from './GlobalStyle';
+import {fontFamily} from "../common/styles";
 
-const GlobalStyle = createGlobalStyle`
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      letter-spacing: 1px;
-    }
-`;
+const theme = {
+    fontFamily: fontFamily
+};
 
 const App = ({lang}) => {
     return (
         <IntlProvider locale={lang} messages={messages[lang]}>
             <Router>
                 <Fragment>
-                    <GlobalStyle/>
+                    <GlobalStyle theme={theme}/>
                     <NavBar/>
                     <Switch>
                         <Route exact path="/">

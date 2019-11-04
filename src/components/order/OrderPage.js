@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 
-import OrderForm from "../forms/OrderForm";
+import OrderForm from "./OrderForm";
 import {makeOrder} from "../../actions/orderActions";
 import {getBasket} from "../../selectors/basketSelectors";
 

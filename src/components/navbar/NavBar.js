@@ -1,57 +1,17 @@
 import React from 'react';
 import {Link, withRouter} from "react-router-dom";
-import styled from "styled-components";
 import {connect} from "react-redux";
 import {FormattedMessage} from "react-intl";
 
 import {setLang} from "../../actions/langActions";
-import {fontFamily, gray5} from "../styles";
 import {getLang} from "../../selectors/langSelectors";
 import {getTotalPrice} from "../../selectors/totalPriceSelectors";
+import {Nav, Container, Button, BtnContainer} from './navbarStyle';
+import {gray5} from "../common/styles";
 
-const Nav = styled.nav`
-    z-index: 1;
-    position: sticky;
-    top: 0;
-    height: 4rem;
-    background-image: linear-gradient(
-        to left,
-        rgb(113, 183, 230),
-        rgb(155, 89, 182)
-    );
-    font-family: ${fontFamily};
-    display: flex;
-    flex-direction: row;
-`;
-const Container = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    h1, h2 {
-        padding-left: 1vw;
-        padding-right: 5vw;
-        color: ${gray5};
-    }
-    div.btn {
-        padding-right: 1rem;
-    }
-`;
-const Button = styled.svg`
-    width: 3rem;
-    height: 3rem;
-`;
-const BtnContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    button {
-        background-color: transparent;
-        color: ${gray5}
-        width: 2rem;
-    }
-    
-`;
+const theme = {
+    color: gray5
+};
 
 const NavBar = ({location, totalPrice, setLang}) => {
     const onClickSetEN = () => setLang('en');
@@ -63,26 +23,9 @@ const NavBar = ({location, totalPrice, setLang}) => {
                 <button onClick={onClickSetEN}>EN</button>
                 <button onClick={onClickSetUA}>UA</button>
             </BtnContainer>
-            <ul>
-                <li>
-                    <Link to="/">Home</Link>
-                </li>
-                <li>
-                    <Link to="/basket">basket</Link>
-                </li>
-                <li>
-                    <Link to="/order">order</Link>
-                </li>
-                <li>
-                    <Link to="/finish">finish</Link>
-                </li>
-                <li>
-                    <Link to="/404">404</Link>
-                </li>
-            </ul>
             {
                 location.pathname === '/'
-                    ? <Container>
+                    ? <Container theme={theme}>
                         <h1><FormattedMessage id="Catalog" defaultMessage="Catalog" /></h1>
                         <Link to="/basket">
                             <div className="btn">{
@@ -106,16 +49,16 @@ const NavBar = ({location, totalPrice, setLang}) => {
                         </Link>
                     </Container>
                     : location.pathname === '/basket'
-                        ? <Container>
+                        ? <Container theme={theme}>
                             <h1><FormattedMessage id="Basket" defaultMessage="Basket" /></h1>
                             <h2><FormattedMessage id="TotalPrice" defaultMessage="Total Price" />: {totalPrice}</h2>
                         </Container>
                         : location.pathname === '/order'
-                            ? <Container>
+                            ? <Container theme={theme}>
                                 <h1><FormattedMessage id="Order" defaultMessage="Order" /></h1>
                             </Container>
                             : location.pathname === '/finish'
-                                && <Container>
+                                && <Container theme={theme}>
                                     <h1><FormattedMessage id="finishText" defaultMessage="Thank You!" /></h1>
                                 </Container>
             }

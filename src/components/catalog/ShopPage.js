@@ -1,24 +1,16 @@
 import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 
 import { getCatalog } from '../../actions/shopActions';
-import { fontFamily, gray2 } from '../styles';
-import ShopCard from "../layout/ShopCard";
-import Spinner from "../layout/Spinner";
+import ShopCard from "./ShopCard";
+import Spinner from "../common/Spinner";
 import {getCatalogSelector, getCatalogLoading} from "../../selectors/shopSelectors";
+import {Container} from './shopPageStyle';
+import {gray2} from "../common/styles";
 
-const Container = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-    grid-gap: 2rem;
-    justify-content: space-evenly;
-    justify-items: center;
-    background-color: white;
-    margin: 1rem 2rem;
-    font-family: ${fontFamily};
-    color: ${gray2};
-`;
+const theme = {
+    color: gray2
+};
 
 const ShopPage = ({ getCatalog, catalog, loading }) => {
 
@@ -31,7 +23,7 @@ const ShopPage = ({ getCatalog, catalog, loading }) => {
     }
 
     return (
-        <Container>
+        <Container theme={theme}>
             {catalog !== null && catalog.map(item => <ShopCard item={item} key={item.id} />)}
         </Container>
     )

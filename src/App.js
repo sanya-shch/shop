@@ -14,8 +14,8 @@ import BasketPage from "./components/pages/BasketPage";
 import OrderPage from "./components/pages/OrderPage";
 import FinishPage from "./components/pages/FinishPage";
 import PageNotFound from "./components/pages/PageNotFound";
-import {getLang} from "./selectors/shopSelectors";
-import messages from "./messages";
+import {getLang} from "./selectors/langSelectors";
+import messages from "./localization";
 
 const GlobalStyle = createGlobalStyle`
     * {

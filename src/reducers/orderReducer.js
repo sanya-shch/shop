@@ -1,34 +1,34 @@
 import {
-    GET_CATALOG,
-    SET_LOADING_CATALOG,
-    GET_CATALOG_ERROR
+    MAKE_ORDER,
+    MAKE_ORDER_ERROR,
+    SET_LOADING_ORDER
 } from '../actions/types';
 
 const initialState = {
-    catalog: null,
+    isSuccess: null,
     loading: false,
     error: null
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case GET_CATALOG:
+        case MAKE_ORDER:
             return {
                 ...state,
-                catalog: action.payload,
-                loading: false
+                isSuccess: true
             };
-        case SET_LOADING_CATALOG:
+        case SET_LOADING_ORDER:
             return {
                 ...state,
                 loading: true
             };
-        case GET_CATALOG_ERROR:
+        case MAKE_ORDER_ERROR:
             console.error(action.payload);
             return {
                 ...state,
                 error: action.payload,
-                loading: false
+                loading: false,
+                isSuccess: false
             };
         default:
             return state;

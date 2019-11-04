@@ -1,34 +1,10 @@
 import {createSelector} from "reselect";
 
-export const getBasket = (state) => {
-    return state.shop.basket;
-};
+export const getCatalogSelector = (state) => state.shop.catalog;
 
-export const getBasketSuperSelector = createSelector (getBasket, (basket) => {
-    return basket;
-});
+const getCatalogItem = (state, id) => state.shop.catalog.find((catalogItem) => catalogItem.id === id);
+export const getCatalogSuperSelector = createSelector(getCatalogItem, (catalogItem) => catalogItem);
 
-export const getCatalogSelector = (state) => {
-    return state.shop.catalog;
-};
+export const getCatalogLoading = (state) => state.shop.loading;
 
-export const getCatalogSuperSelector = createSelector (getCatalogSelector, (catalog) => {
-    return catalog;
-});
-
-export const getLoading = (state) => {
-    return state.shop.loading;
-};
-
-export const getError = (state) => {
-    return state.shop.error;
-};
-
-export const getTotalPrice = (state) => {
-    return state.shop.totalPrice;
-};
-
-
-export const getLang = (state) => {
-    return state.lang.lang;
-};
+export const getCatalogError = (state) => state.shop.error;

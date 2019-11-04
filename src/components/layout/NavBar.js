@@ -6,7 +6,8 @@ import {FormattedMessage} from "react-intl";
 
 import {setLang} from "../../actions/langActions";
 import {fontFamily, gray5} from "../styles";
-import {getLang, getTotalPrice} from "../../selectors/shopSelectors";
+import {getLang} from "../../selectors/langSelectors";
+import {getTotalPrice} from "../../selectors/totalPriceSelectors";
 
 const Nav = styled.nav`
     z-index: 1;
@@ -53,29 +54,32 @@ const BtnContainer = styled.div`
 `;
 
 const NavBar = ({location, totalPrice, setLang}) => {
+    const onClickSetEN = () => setLang('en');
+    const onClickSetUA = () => setLang('uk');
+
     return (
         <Nav>
             <BtnContainer>
-                <button onClick={() => setLang('en')}>EN</button>
-                <button onClick={() => setLang('uk')}>UA</button>
+                <button onClick={onClickSetEN}>EN</button>
+                <button onClick={onClickSetUA}>UA</button>
             </BtnContainer>
-            {/*<ul>*/}
-            {/*    <li>*/}
-            {/*        <Link to="/">Home</Link>*/}
-            {/*    </li>*/}
-            {/*    <li>*/}
-            {/*        <Link to="/basket">basket</Link>*/}
-            {/*    </li>*/}
-            {/*    <li>*/}
-            {/*        <Link to="/order">order</Link>*/}
-            {/*    </li>*/}
-            {/*    <li>*/}
-            {/*        <Link to="/finish">finish</Link>*/}
-            {/*    </li>*/}
-            {/*    <li>*/}
-            {/*        <Link to="/404">404</Link>*/}
-            {/*    </li>*/}
-            {/*</ul>*/}
+            <ul>
+                <li>
+                    <Link to="/">Home</Link>
+                </li>
+                <li>
+                    <Link to="/basket">basket</Link>
+                </li>
+                <li>
+                    <Link to="/order">order</Link>
+                </li>
+                <li>
+                    <Link to="/finish">finish</Link>
+                </li>
+                <li>
+                    <Link to="/404">404</Link>
+                </li>
+            </ul>
             {
                 location.pathname === '/'
                     ? <Container>

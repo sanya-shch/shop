@@ -1,11 +1,17 @@
 export const GET_CATALOG = 'GET_CATALOG';
-export const ERROR = 'ERROR';
-
-export const SET_LOADING = 'SET_LOADING';
+export const GET_CATALOG_ERROR = 'GET_CATALOG_ERROR';
+export const SET_LOADING_CATALOG = 'SET_LOADING_CATALOG';
 
 export const ADD_TO_BASKET = 'ADD_TO_BASKET';
 export const REMOVE_FROM_BASKET = 'REMOVE_FROM_BASKET';
+export const CLEAN_BASKET = 'CLEAN_BASKET';
+
+export const ADD_TO_TOTAL_PRICE = 'ADD_TO_TOTAL_PRICE';
+export const REMOVE_FROM_TOTAL_PRICE = 'REMOVE_FROM_TOTAL_PRICE';
+export const CLEAN_TOTAL_PRICE = 'CLEAN_TOTAL_PRICE';
 
 export const MAKE_ORDER = 'MAKE_ORDER';
+export const MAKE_ORDER_ERROR = 'MAKE_ORDER_ERROR';
+export const SET_LOADING_ORDER = 'SET_LOADING_ORDER';
 
 export const SET_LANG = 'SET_LANG';

@@ -4,10 +4,9 @@ import {Link} from "react-router-dom";
 import styled from "styled-components";
 import {FormattedMessage} from "react-intl";
 
-import {Btn} from "../styles";
 import BasketCard from "../layout/BasketCard";
-import { fontFamily, gray2 } from '../styles';
-import {getBasketSuperSelector} from "../../selectors/shopSelectors";
+import { fontFamily, gray2, Btn } from '../styles';
+import {getBasketSuperSelectorIds} from "../../selectors/basketSelectors";
 
 const Container = styled.div`
     height: calc(100vh - 4rem);
@@ -31,12 +30,11 @@ const BtnContainer = styled.div`
 `;
 
 const BasketPage = ({basket}) => {
-
     return(
         <Container>
             <div>
                 { basket.length !== 0
-                    ? basket.map((item) =>  <BasketCard item={item} key={item.id}/>)
+                    ? basket.map((id) =>  <BasketCard item={id} key={id}/>)
                     : <Text><FormattedMessage id="empty" defaultMessage="Basket is empty!" /></Text>
                 }
             </div>
@@ -55,7 +53,7 @@ const BasketPage = ({basket}) => {
 };
 
 const mapStateToProps = state => ({
-    basket: getBasketSuperSelector(state)
+    basket: getBasketSuperSelectorIds(state)
 });
 
 export default connect(

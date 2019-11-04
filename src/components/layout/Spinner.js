@@ -1,7 +1,6 @@
-import React from 'react';
 import styled from "styled-components";
 
-const Circle = styled.svg`
+export default styled.svg`
     position: absolute;
     top: 50%;
     left: 50%;
@@ -21,9 +20,3 @@ const Circle = styled.svg`
             transform: translate(-50%, -50%) rotate(360deg);
     }
 `;
-
-const Spinner = () => {
-    return <Circle/>
-};
-
-export default Spinner;

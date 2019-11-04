@@ -3,8 +3,10 @@ import {connect} from "react-redux";
 import styled from "styled-components";
 import {FormattedMessage} from "react-intl";
 
-import {addToBasket, removeFromBasket} from "../../actions/shopActions";
-import {getCatalogSelector} from "../../selectors/shopSelectors";
+import {addToBasket, removeFromBasket} from "../../actions/basketActions";
+import {addToTotalPrice, removeFromTotalPrice} from "../../actions/totalPriceActions";
+import {getCatalogSuperSelector} from "../../selectors/shopSelectors";
+import {getBasketSuperSelector} from "../../selectors/basketSelectors";
 
 const Container = styled.div`
     border: 1px solid #b9b9b9;
@@ -90,25 +92,30 @@ const Price = styled.h2`
     }
 `;
 
-const BasketCard = ({addToBasket, removeFromBasket, catalog, item}) => {
-
-    const {brand, name, price, type, img} = catalog.find((catalogItem) => catalogItem.id === item.id);
-
-    const [totalPrice, setTotalPrice] = useState(0);
+const BasketCard = ({
+                        item,
+                        addToBasket,
+                        removeFromBasket,
+                        addToTotalPrice,
+                        removeFromTotalPrice,
+                        catalogItem: { id, brand, name, price, type, img },
+                        basketItemCount
+}) => {
+    const [totalPrice, setTotalPrice] = useState(price);
     useEffect(() => {
-        setTotalPrice(`${item.count * price.slice(0, -1)}${price.slice(-1)}`);
-    }, []);
+        setTotalPrice(`${basketItemCount * price.slice(0, -1)}${price.slice(-1)}`);
+    }, [basketItemCount]);
 
-    const removeBtn = () => {
-        removeFromBasket(item.id, price);
-        setTotalPrice(`${item.count * price.slice(0, -1)}${price.slice(-1)}`);
+    const onClickRemoveBtn = () => {
+        removeFromBasket(item);
+        removeFromTotalPrice(price);
     };
 
-    const addBtn = () => {
-        addToBasket(item.id, price);
-        setTotalPrice(`${item.count * price.slice(0, -1)}${price.slice(-1)}`);
-    };
+    const onClickAddBtn = () => {
+        addToBasket(item);
+        addToTotalPrice(price);
 
+    };
 
     return(
         <Container>
@@ -119,7 +126,7 @@ const BasketCard = ({addToBasket, removeFromBasket, catalog, item}) => {
                 <h3>{price}</h3>
             </Info>
             <CountContainer>
-                <Button onClick={() => removeBtn()} enable-background="new 0 0 511.343 511.343" viewBox="0 0 511.343 511.343" xmlns="http://www.w3.org/2000/svg">
+                <Button onClick={onClickRemoveBtn} enable-background="new 0 0 511.343 511.343" viewBox="0 0 511.343 511.343" xmlns="http://www.w3.org/2000/svg">
                     <path d="m149 384.005c-35.105 0-63.666 28.561-63.666 63.667s28.561 63.667 63.666 63.667c35.106 0 63.667-28.561 63.667-63.667s-28.561-63.667-63.667-63.667z" fill="#d8d6d6"/>
                     <path d="m383.667 384.005c-35.106 0-63.667 28.561-63.667 63.667s28.561 63.667 63.667 63.667 63.667-28.561 63.667-63.667-28.561-63.667-63.667-63.667z" fill="#d8d6d6"/>
                     <path d="m490.334 128.002h-415.997c-12.192 0-21.84 10.367-20.943 22.542l14.12 191.78c.812 11.027 10.008 19.459 20.925 19.459.964 0 136.927-8.011 360.458-21.147 9.162-.538 16.914-6.966 19.141-15.87l42.67-170.67c3.308-13.236-6.71-26.094-20.374-26.094z" fill="#ece2e2"/>
@@ -127,8 +134,8 @@ const BasketCard = ({addToBasket, removeFromBasket, catalog, item}) => {
                     <path d="m447.667 426.005h-298.525c-41.154 0-75.747-30.83-80.466-71.715-.049-.416 1.094 12.263-24.208-269.618h-23.468c-11.598 0-21-9.402-21-21s9.402-21 21-21h42.667c10.87 0 19.944 8.296 20.916 19.123l25.844 287.917c2.378 19.567 18.979 34.293 38.715 34.293h298.525c11.598 0 21 9.402 21 21s-9.402 21-21 21z" fill="#ccc"/>
                     <path d="m309 148.672h-64c-11.598 0-21-9.402-21-21s9.402-21 21-21h64c11.598 0 21 9.402 21 21s-9.402 21-21 21z" fill="#d86c83"/>
                 </Button>
-                <h2>{item.count}</h2>
-                <Button onClick={() => addBtn()} enable-background="new 0 0 511.343 511.343" viewBox="0 0 511.343 511.343" xmlns="http://www.w3.org/2000/svg">
+                <h2>{basketItemCount}</h2>
+                <Button onClick={onClickAddBtn} enable-background="new 0 0 511.343 511.343" viewBox="0 0 511.343 511.343" xmlns="http://www.w3.org/2000/svg">
                     <path d="m149 384.005c-35.105 0-63.666 28.561-63.666 63.667s28.561 63.667 63.666 63.667c35.106 0 63.667-28.561 63.667-63.667s-28.561-63.667-63.667-63.667z" fill="#d8d6d6"/>
                     <path d="m383.667 384.005c-35.106 0-63.667 28.561-63.667 63.667s28.561 63.667 63.667 63.667 63.667-28.561 63.667-63.667-28.561-63.667-63.667-63.667z" fill="#d8d6d6"/>
                     <path d="m490.334 128.002h-415.997c-12.192 0-21.84 10.367-20.943 22.542l14.12 191.78c.812 11.027 10.008 19.459 20.925 19.459.964 0 136.927-8.011 360.458-21.147 9.162-.538 16.914-6.966 19.141-15.87l42.67-170.67c3.308-13.236-6.71-26.094-20.374-26.094z" fill="#ece2e2"/>
@@ -142,11 +149,12 @@ const BasketCard = ({addToBasket, removeFromBasket, catalog, item}) => {
     )
 };
 
-const mapStateToProps = state => ({
-    catalog: getCatalogSelector(state)
+const mapStateToProps = (state, props) => ({
+    catalogItem: getCatalogSuperSelector(state, props.item),
+    basketItemCount: getBasketSuperSelector(state, props.item)
 });
 
 export default connect(
     mapStateToProps,
-    { addToBasket, removeFromBasket }
+    { addToBasket, removeFromBasket, addToTotalPrice, removeFromTotalPrice }
 )(BasketCard);

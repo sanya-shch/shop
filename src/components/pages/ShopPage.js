@@ -4,9 +4,9 @@ import styled from 'styled-components';
 
 import { getCatalog } from '../../actions/shopActions';
 import { fontFamily, gray2 } from '../styles';
-import ShopingCard from "../layout/ShopingCard";
-import Spinner from "../layout/Spiner";
-import {getCatalogSuperSelector, getLoading} from "../../selectors/shopSelectors";
+import ShopCard from "../layout/ShopCard";
+import Spinner from "../layout/Spinner";
+import {getCatalogSelector, getCatalogLoading} from "../../selectors/shopSelectors";
 
 const Container = styled.div`
     display: grid;
@@ -32,14 +32,14 @@ const ShopPage = ({ getCatalog, catalog, loading }) => {
 
     return (
         <Container>
-            {catalog !== null && catalog.map(item => <ShopingCard item={item} key={item.id} />)}
+            {catalog !== null && catalog.map(item => <ShopCard item={item} key={item.id} />)}
         </Container>
     )
 };
 
 const mapStateToProps = state => ({
-    catalog: getCatalogSuperSelector(state),
-    loading: getLoading(state)
+    catalog: getCatalogSelector(state),
+    loading: getCatalogLoading(state)
 });
 
 export default connect(

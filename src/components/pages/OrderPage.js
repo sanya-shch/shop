@@ -3,15 +3,14 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 
 import OrderForm from "../forms/OrderForm";
-import {makeOrder} from "../../actions/shopActions";
-import {getBasket} from "../../selectors/shopSelectors";
+import {makeOrder} from "../../actions/orderActions";
+import {getBasket} from "../../selectors/basketSelectors";
 
 const OrderPage = ({makeOrder, basket, history}) => {
     const showResults = (values) => {
         values["basket"] = basket;
         makeOrder(values);
         history.push('/finish');
-        // window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
     };
     return(
         <div>

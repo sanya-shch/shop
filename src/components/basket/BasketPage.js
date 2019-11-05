@@ -6,7 +6,7 @@ import {FormattedMessage} from "react-intl";
 import BasketCard from "./BasketCard";
 import Btn from "../common/Btn";
 import {Container, BtnContainer, Text} from './basketPageStyle';
-import {getBasketSuperSelectorIds} from "../../selectors/basketSelectors";
+import {getBasketSuperSelectorIds} from "../../selectors";
 import {gray2} from "../common/styles";
 
 const theme = {
@@ -17,7 +17,7 @@ const BasketPage = ({basket}) => {
     return(
         <Container theme={theme}>
             <div>
-                { basket.length !== 0
+                { basket.size !== 0
                     ? basket.map((id) =>  <BasketCard item={id} key={id}/>)
                     : <Text><FormattedMessage id="empty" defaultMessage="Basket is empty!" /></Text>
                 }
@@ -26,7 +26,7 @@ const BasketPage = ({basket}) => {
                 <div>
                     <Link to="/"><Btn><FormattedMessage id="BackToCatalog" defaultMessage="Back to Catalog" /></Btn></Link>
                 </div>
-                { basket.length !== 0
+                { basket.size !== 0
                     && <div>
                         <Link to="/order"><Btn><FormattedMessage id="Order" defaultMessage="Order" /></Btn></Link>
                     </div>

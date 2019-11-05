@@ -13,7 +13,7 @@ import BasketPage from "../basket/BasketPage";
 import OrderPage from "../order/OrderPage";
 import FinishPage from "../finish/FinishPage";
 import PageNotFound from "../404/PageNotFound";
-import {getLang} from "../../selectors/langSelectors";
+import {getLang} from "../../selectors";
 import messages from "../../localization";
 import {GlobalStyle} from './GlobalStyle';
 import {fontFamily} from "../common/styles";

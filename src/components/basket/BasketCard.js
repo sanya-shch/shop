@@ -4,8 +4,7 @@ import {FormattedMessage} from "react-intl";
 
 import {addToBasket, removeFromBasket} from "../../actions/basketActions";
 import {addToTotalPrice, removeFromTotalPrice} from "../../actions/totalPriceActions";
-import {getCatalogSuperSelector} from "../../selectors/shopSelectors";
-import {getBasketSuperSelector} from "../../selectors/basketSelectors";
+import {getBasketSuperSelector, getCatalogSuperSelector} from "../../selectors";
 import {Container, Button, CountContainer, Img, Info, Price} from './basketCardStyle';
 
 const BasketCard = ({

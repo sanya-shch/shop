@@ -4,7 +4,7 @@ import {withRouter} from "react-router-dom";
 
 import OrderForm from "./OrderForm";
 import {makeOrder} from "../../actions/orderActions";
-import {getBasket} from "../../selectors/basketSelectors";
+import {getBasket} from "../../selectors";
 
 const OrderPage = ({makeOrder, basket, history}) => {
     const showResults = (values) => {

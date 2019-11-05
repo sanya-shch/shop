@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { getCatalog } from '../../actions/shopActions';
 import ShopCard from "./ShopCard";
 import Spinner from "../common/Spinner";
-import {getCatalogSelector, getCatalogLoading} from "../../selectors/shopSelectors";
+import {getCatalogSelector, getCatalogLoading} from "../../selectors";
 import {Container} from './shopPageStyle';
 import {gray2} from "../common/styles";
 

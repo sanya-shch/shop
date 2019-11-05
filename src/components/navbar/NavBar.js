@@ -4,8 +4,7 @@ import {connect} from "react-redux";
 import {FormattedMessage} from "react-intl";
 
 import {setLang} from "../../actions/langActions";
-import {getLang} from "../../selectors/langSelectors";
-import {getTotalPrice} from "../../selectors/totalPriceSelectors";
+import {getTotalPrice, getLang} from "../../selectors";
 import {Nav, Container, Button, BtnContainer} from './navbarStyle';
 import {gray5} from "../common/styles";
 
@@ -19,7 +18,7 @@ const NavBar = ({location, totalPrice, setLang}) => {
 
     return (
         <Nav>
-            <BtnContainer>
+            <BtnContainer theme={theme}>
                 <button onClick={onClickSetEN}>EN</button>
                 <button onClick={onClickSetUA}>UA</button>
             </BtnContainer>
